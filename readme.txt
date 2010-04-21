@@ -38,6 +38,8 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 1. Admin options panel in `0.1`
 
+2. Defualt error display
+
 
 == Changelog ==
 
