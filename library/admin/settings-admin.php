@@ -20,12 +20,12 @@ function comment_validation_reloaded_settings_args() {
 	$settings_arr = array(
 		/* Activate */
 		'activate' => false,
-		'version' => '1.6',
+		'version' => '1.7',
 		'author' => true,
 		
 		/* Comment form */
 		'form-id-class' => '#commentform',
-		'minimum' => '140',
+		'minimum' => '40',
 			
 		/* wpAd */	
 		'hide_ad' => false,
@@ -153,6 +153,15 @@ function comment_validation_reloaded_page() {
                         <input type="hidden" name="<?php echo $hidden_field_name; ?>" value="R" />
                     </p>
             
+                </form>
+                
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post"<?php if ( $val['author'] ) echo ' style="display:none;"'; ?>>
+                    <p style="float:left; margin:18px 10px 0;">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="CN9BU5LAYCXV8">
+                        <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                    </p>
                 </form>
 
 			</div>

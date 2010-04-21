@@ -40,8 +40,8 @@
             </th>
             <td>
             	<select id="<?php echo $data['version']; ?>" name="<?php echo $data['version']; ?>" style="width:60px;">
-                    <option value="1.6" <?php if ( $val['version'] == '1.6' ) echo ' selected="selected"'; ?>>1.6</option>
-                    <!--<option value="1.7" <?php if ( $val['version'] == '1.7' ) echo ' selected="selected"'; ?>>1.7</option>-->
+                    <option value="1.6" <?php if ( $val['version'] == '1.6' ) echo ' selected="selected"'; ?> disabled="disabled">1.6</option>
+                    <option value="1.7" <?php if ( $val['version'] == '1.7' ) echo ' selected="selected"'; ?>>1.7</option>
                 </select>
             </td>
         </tr>

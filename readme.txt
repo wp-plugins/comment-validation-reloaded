@@ -41,6 +41,11 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+**Version 0.2.2**
+
+* Setting page version update
+* Default version update
+
 **Version 0.2.1**
 
 * Removed CDN(hosted) library in favor of version 1.7, which isn't hosted yet.
