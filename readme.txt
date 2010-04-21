@@ -41,15 +41,25 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+**Version 0.2.1**
+
+* Removed CDN(hosted) library in favor of version 1.7, which isn't hosted yet.
+* Bug fix
+
 **Version 0.2**
+
 * Using CDN(hosted) library version 1.6
 * Added options to admin
 
 **Version 0.1**
+
 * Initial release.
 
 
 == Upgrade Notice ==
+
+= 0.2.1 =
+Admin bug fix.
 
 = 0.1 =
 No need to upgrade, just install.
