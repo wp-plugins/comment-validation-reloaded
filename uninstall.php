@@ -35,7 +35,7 @@ if ( $_POST[ 'uninstall' ] ) {
 	}
 
 	if ( in_array( 'comment-validation-reloaded/comment-validation-reloaded.php', get_option( 'active_plugins' ) ) )
-		wp_die( 'Anywhere is still active. Please disable it on your plugins page first.' );
+		wp_die( 'Comment Validation Reloaded is still active. Please disable it on your plugins page first.' );
 	echo "<p><strong>Please comment out the UNINSTALL_COMM <em>define()</em> on line 29 in this file!</strong></p>";
 	wp_mail( $current_user->user_email, 'Comment Validation Reloaded Uninstalled', '' );
 } else {

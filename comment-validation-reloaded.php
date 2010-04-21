@@ -2,8 +2,8 @@
 /*
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
- * Description: Built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.1
+ * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
+ * Version: 0.2
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -61,15 +61,15 @@
 	add_action( 'admin_init', 'cvr_admin_init' );
 	add_action( 'admin_menu', 'cvr_add_pages' );
 	add_action( 'wp_print_scripts', 'cvr_script' );
-	add_action( 'wp_head', 'cvr_options' );
-	add_action( 'wp_head', 'cvr_tweet_box' );
+	add_action( 'wp_head', 'cvr_css' );
+	add_action( 'wp_footer', 'cvr_options' );
+	add_action( 'comment_form', 'cvr_author' );
 
 /**
  * Filters.
  * @since 0.1
  */	
 	add_filter( 'plugin_action_links', 'cvr_plugin_actions', 10, 2 ); //Add a settings page to the plugin menu
-	add_filter( 'the_content', 'cvr_tweet_box_div' );
 
 /**
  * Load the RSS Shortcode settings if in the WP admin.
@@ -83,7 +83,7 @@
  * Load the settings from the database.
  * @since 0.1
  */
-	$comment = get_option( 'comment_validation_reloaded_settings' );
+	$comm = get_option( 'comment_validation_reloaded_settings' );
 
  /**
  * Load the stylesheet
@@ -100,7 +100,7 @@ function cvr_admin_init() {
  */
 function cvr_add_pages() {
 	if ( function_exists( 'add_options_page' ) ) 
-		$page = add_options_page( 'Comment Validation Reloaded Settings', 'Validation Reloaded', 10, 'comment-validation-reloaded.php', cvr_page );
+		$page = add_options_page( 'Comment Validation Reloaded Settings', 'Validation Reloaded', 10, 'comment-validation-reloaded.php', comment_validation_reloaded_page );
 			add_action( 'admin_print_styles-' . $page, 'cvr_admin_style' );
 			add_action( 'admin_print_scripts-' . $page, 'cvr_admin_script' );
 }
@@ -126,38 +126,89 @@ function cvr_admin_script() {
 }
 
 /**
- * Adds the @anywhere script
+ * Adds the jQuery form validation script
  * @since 0.1
  */
 function cvr_script() {
-	global $comment;
-	$api = $comment['api'];
+	global $comm;
+	$active = $comm['activate'];
+	$v = $comm['version'];
 	
-	if ( $api != ''  )
-		wp_enqueue_script( 'anywhere', 'http://platform.twitter.com/anywhere.js?id=' . $api . '&amp;v=' . $v . '', false, $v, false );
+	if ( $active != false && comments_open() )
+		//wp_enqueue_script( 'comment-validation', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $v . '/jquery.validate.min.js', array( 'jquery' ), $v, true );
+		wp_enqueue_script( 'comment-validation', CVR_JS . '/validate.js', array( 'jquery' ), '1.7', true );
 }
 
 /**
- * Adds @anywhere options
+ * Adds validation script to footer
  * @since 0.1
  */
 function cvr_options() {
-	global $comment;
-	$api = $comment['api'];
-	$users = $comment['linkifyusers'];
-	$cards = $comment['hovercards'];
-	if ( $api != '' ) : ?>
-<!-- @anywhere by Austin Passy of Frosty Web Designs -->
+	global $comm;
+	$active = $comm['activate'];
+	$name = $comm['form-id-class'];
+	$min = $comm['minimum'];
+	
+	if ( $active != false && comments_open() ) : ?>
+<!-- Comment Validation Reloaded by Austin Passy of Frosty Web Designs -->
 <script type="text/javascript">
-twttr.anywhere(onAnywhereLoad);
-	function onAnywhereLoad(twitter) {
-		// configure the @anywhere environment
-		<?php if ( $users != false ) echo 'twitter.linkifyUsers();' . "\n"; ?>
-		<?php if ( $cards != false ) echo 'twitter.hovercards();' . "\n"; ?>
-	};
+jQuery(function($) {
+	var errorContainer = $('<p class="error">Please fill out the required fields</p>').appendTo('<?php echo $name; ?>').hide();
+	var errorLabelContainer = $('<p class="error errorlabels"></p>').appendTo('<?php echo $name; ?>').hide();
+	$('<?php echo $name; ?>').validate({
+		rules: {
+			author: 'required',
+			email: {
+				required: true,
+				email: true
+			},
+			url: 'url',
+			comment: {
+				required: true,
+				minlength: <?php echo $min; ?>
+			}
+		},
+		errorContainer: errorContainer,
+		errorLabelContainer: errorLabelContainer,
+		ignore: ':hidden'
+	});
+
+	$.validator.messages.required = '' + $.validator.messages.required;
+	$.validator.messages.email = '&raquo; ' + $.validator.messages.email;
+	$.validator.messages.url = '&raquo; ' + $.validator.messages.url;
+});
 </script>
-<!-- /anywhere -->
+<!-- /Comment Validation Reloaded -->
 <?php endif;
+}
+
+/**
+ * Adds css to the header
+ */
+function cvr_css() { 
+	global $comm;
+	$active = $comm['activate'];
+	$name = $comm['form-id-class'];
+	
+	if ( $active != false && comments_open() ) : ?>
+<style type="text/css">
+<?php echo $name; ?> input.error, <?php echo $name; ?> textarea.error {background:#FFEBE8;border:1px solid #cc0000;padding:6px 9px}
+<?php echo $name; ?> p.error, <?php echo $name; ?> label.error {color:#f00}
+<?php echo $name; ?> p.errorlabels label {border:0;display:block}
+</style>
+<?php endif;
+}
+
+/**
+ * filter @anywhere tweetbox into the content
+ * @since 0.1.1
+ */
+function cvr_author() {
+	global $comm;
+	$author = $comm['author'];
+	
+	if ( $author != false && comments_open() )
+		echo '<span id="comment-validation-reloaded-author" style="font-size:80%;"><a href="http://austinpassy.com/wordpress-plugins/comment-validation-reloaded" title="WordPress Comment Validation Reloaded plugin">Comments</a> validated by <a href="http://twitter.com/thefrosty" title="Austin Passy on twitter">@TheFrosty</a></span>';
 }
 
 /**
@@ -222,12 +273,12 @@ function cvr_plugin_actions( $links, $file ) {
  * @package admin
  */
 function cvr_admin_warnings() {
-	global $comment;
+	global $comm;
 		
 		function cvr_warning() {
-			global $comment;
+			global $comm;
 
-			if ( $comment['api'] == '' )
+			if ( $comm['activate'] != true )
 				echo '<div id="comment-validation-reloaded-warning" class="updated fade"><p><strong>Comment Validation Reloaded plugin is not configured yet.</strong> It will not load until you update the <a href="' . admin_url( 'options-general.php?page=comment-validation-reloaded.php' ) . '">options</a>.</p></div>';
 		}
 
@@ -235,9 +286,9 @@ function cvr_admin_warnings() {
 		
 		/*
 		function cvr_wrong_settings() {
-			global $comment;
+			global $comm;
 
-			if ( $comment[ 'hide_ad' ] != false )
+			if ( $comm[ 'hide_ad' ] != false )
 				echo '<div id="comment-validation-reloaded-warning" class="updated fade"><p><strong>You&prime;ve just hid the ad.</strong> Thanks for <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7329157" title="Donate on PayPal" class="external">donating</a>!</p></div>';
 		}
 		add_action( 'admin_notices', 'cvr_wrong_settings' );

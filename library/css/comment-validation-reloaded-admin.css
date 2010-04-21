@@ -47,7 +47,7 @@ textarea {
 	display: none;
 	visibility: hidden;
 }
-.inside.addAPI .please-add {
+.inside.activate .please-add {
 	display: block;
 	visibility: visible;
 }

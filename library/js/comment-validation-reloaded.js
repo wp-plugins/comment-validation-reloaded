@@ -67,10 +67,16 @@ jQuery(document).ready(
 	
 	// If the API is entered and is greater than said characters
 	jQuery('input#activate').change(function() {
-		//var checked = jQuery('input#activate:checked').val();
-			jQuery('#form-id-class').toggle(); //show the hidden boxes
-			jQuery('#form-id-class').parent().parent().parent().toggleClass('activate'); //remove a class
+		var checked = jQuery('input#activate:checked').val();
+		if ( checked ) {
+			jQuery('#comment-form, #comment-min').show(); //show the hidden boxes
+			jQuery('#comment-form').parent().parent().parent().removeClass('activate'); //remove a class
 			jQuery('.inside').removeClass('activate').find('.please-add').toggle(); //hide the 'h4' tag
+		} else {
+			jQuery('#comment-form, #comment-min').hide(); //hide the boxes
+			jQuery('#comment-form').parent().parent().parent().addClass('activate'); //add a class
+			jQuery('div.inside.activate').find('.please-add').show(); //show the 'h4' tag
+		}
 	});
 	
 	jQuery('input#form-id-class').keyup(function() {
@@ -89,18 +95,6 @@ jQuery(document).ready(
 		}
 	});
 	
-	
-	// If tweetbox is checked
-	jQuery('input#tweetbox').change(function() {
-		var checked = jQuery('input#tweetbox:checked').val();
-		//console.log(charLength);
-		if ( checked ) {
-			jQuery('#tweetbox-label,#tweetbox-width').show();
-		} else {
-			jQuery('#tweetbox-label,#tweetbox-width').hide();
-		}
-	});
-	
-	jQuery('div.inside').append('<h4 class="please-add" style="text-align:center;">Please add your API key to begin</h4>');
+	jQuery('div.inside').append('<h4 class="please-add" style="text-align:center;">Please activate to begin</h4>');
 	
 });

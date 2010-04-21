@@ -9,6 +9,11 @@ Stable tag: trunk
 
 == Description ==
 
+Avoid those pesky blank page with an error message like &ldquo;please fill out required fields&rdquo; then loosing your/users comment info. This plugin aims to help by adding validation to the comment form. When a user submits the form and something is missing, an appropiate message is displayed and individual fields are highlighted. When the email or url is in an incorrect format, a message is displayed accordingly. Requires the user to have javascript activated.
+
+**Why should you install it?** Because you care for comments and want to help users reduce mistakes that hold them off from commenting at all.
+
+**Whats the technology used?** [jQuery](http://jquery.com) and the [jQuery Validation plugin](http://bassistance.de/jquery-plugins/jquery-plugin-validation/) with a few customizations to make it fit into any WordPress theme.
 
 == Installation ==
 
@@ -22,10 +27,11 @@ Follow the steps below to install the plugin.
 == Frequently Asked Questions ==
 
 = Why create this plugin? =
+Because there is a newer validation script out there, but no updated plugins. 
 
 
 = I think i want to uninstall but... =
-Be sure to click the uninstall script that you **manually** add a value to `define( 'UNINSTALL_COMM', '' )` on line 29. That means `1` OR like this: `define( 'UNINSTALL_COMM', '1' )`. After that run the script and all options should be uninstalled.
+Be sure to click the uninstall script that you **manually** add a value to `define( 'UNINSTALL_COMM', '' )` on line 29. That means `1` OR like this: `define( 'UNINSTALL_COMM', '1' )`. After that run the script and all options should be uninstalled. **Note: This script will only work for WordPress 3.0 or less**
 
 
 == Screenshots ==
@@ -34,6 +40,10 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 
 == Changelog ==
+
+**Version 0.2**
+* Using CDN(hosted) library version 1.6
+* Added options to admin
 
 **Version 0.1**
 * Initial release.

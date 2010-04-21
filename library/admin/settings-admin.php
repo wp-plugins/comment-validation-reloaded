@@ -18,10 +18,14 @@
  */
 function comment_validation_reloaded_settings_args() {
 	$settings_arr = array(
-		/* Twitter API */
+		/* Activate */
 		'activate' => false,
 		'version' => '1.6',
 		'author' => true,
+		
+		/* Comment form */
+		'form-id-class' => '#commentform',
+		'minimum' => '140',
 			
 		/* wpAd */	
 		'hide_ad' => false,
@@ -43,7 +47,7 @@ function comment_validation_reloaded_page() {
 	$plugin_name = 'Comment Validation Reloaded';
 	$settings_page_title = 'Comment Validation Reloaded settings';
 	$hidden_field_name = 'comment_validation_reloaded_submit_hidden';
-	$plugin_data = get_plugin_data( ANYWHERE . '/comment-validation-reloaded.php');
+	$plugin_data = get_plugin_data( CVR . '/comment-validation-reloaded.php');
 
 	/*
 	* Grabs the default plugin settings
