@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.2.2
+ * Version: 0.2.3
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -134,10 +134,18 @@ function cvr_script() {
 	global $comm;
 	$active = $comm['activate'];
 	$v = $comm['version'];
+	$internal = $comm['internal'];
+	$name = $comm['form-id-class'];
+	$id = str_replace(array('#','.'),'',$name);
+	$min = $comm['minimum'];
 	
-	if ( $active != false && comments_open() ) :
-		//wp_enqueue_script( 'comment-validation', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $v . '/jquery.validate.min.js', array( 'jquery' ), $v, true );
-		wp_enqueue_script( 'comment-validation', CVR_JS . '/validate.js', array( 'jquery' ), '1.7', true );
+	if ( $active != false && ( is_singular() && comments_open() ) )  :
+		if ( $v == '1.6' )
+			wp_enqueue_script( 'comment-validation', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $v . '/jquery.validate.min.js', array( 'jquery' ), $v, true );
+		else
+			wp_enqueue_script( 'comment-validation', CVR_JS . '/validate.js', array( 'jquery' ), $v, true );
+		if ( $internal != false )
+			wp_enqueue_script( 'validation', CVR_JS . '/validation.js.php?id='.$id.'&amp;min='.$min.'&amp;v='.$v, array( 'jquery' ), $plugin_data['Version'], true );
 	endif;
 }
 
@@ -150,8 +158,9 @@ function cvr_options() {
 	$active = $comm['activate'];
 	$name = $comm['form-id-class'];
 	$min = $comm['minimum'];
+	$internal = $comm['internal'];
 	
-	if ( $active != false && comments_open() ) : ?>
+	if ( ( $active != false && ( is_singular() && comments_open() ) ) && $internal != true )  : ?>
 <!-- Comment Validation Reloaded by Austin Passy of Frosty Web Designs -->
 <script type="text/javascript">
 jQuery(function($) {
@@ -192,7 +201,7 @@ function cvr_css() {
 	$active = $comm['activate'];
 	$name = $comm['form-id-class'];
 	
-	if ( $active != false && comments_open() ) : ?>
+	if ( $active != false && ( is_singular() && comments_open() ) )  : ?>
 <style type="text/css">
 <?php echo $name; ?> input.error, <?php echo $name; ?> textarea.error {background:#FFEBE8;border:1px solid #cc0000;padding:6px 9px}
 <?php echo $name; ?> p.error, <?php echo $name; ?> label.error {color:#f00}
@@ -209,7 +218,7 @@ function cvr_author() {
 	global $comm;
 	$author = $comm['author'];
 	
-	if ( $author != false && comments_open() )
+	if ( $author != false && ( is_singular() && comments_open() ) )
 		echo '<span id="comment-validation-reloaded-author" style="font-size:80%;"><a href="http://austinpassy.com/wordpress-plugins/comment-validation-reloaded" title="WordPress Comment Validation Reloaded plugin">Comments</a> validated by <a href="http://twitter.com/thefrosty" title="Austin Passy on twitter">@TheFrosty</a></span>';
 }
 

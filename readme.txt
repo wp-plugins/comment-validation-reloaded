@@ -43,6 +43,14 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+**Version 0.2.3**
+
+* Added check for singular post with comments open to enqueue scripts and style
+* Check for valication version
+* Allow for internal or external validation script
+	* Use internal if having issues (external is a php file with *header* JS
+	* Having issues with external javascript (trying to execute with PHP)...
+
 **Version 0.2.2**
 
 * Setting page version update

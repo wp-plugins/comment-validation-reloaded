@@ -56,6 +56,17 @@
                 <strong>Note:</strong> This will only show up below the <code>tweetbox</code> (if active).</span>
             </td>
         </tr>
+    	<tr>
+        	<th>
+            	<label for="<?php echo $data['internal']; ?>">Use external:</label> 
+            </th>
+            <td>
+                <input id="<?php echo $data['internal']; ?>" name="<?php echo $data['internal']; ?>" type="checkbox" <?php if ( $val['internal'] ) echo 'checked="checked"'; ?> value="true" />
+                <a class="question" title="Help &amp; Examples">[?]</a><br />
+                <span class="hide">check this box to <strong>use</strong> the external javascript validation.<br />
+                <strong>Note:</strong> If having problems, uncheck for internal.</span>
+            </td>
+        </tr>
         
     </table>
     
