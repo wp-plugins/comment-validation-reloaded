@@ -22,7 +22,7 @@ function comment_validation_reloaded_settings_args() {
 		'activate' => false,
 		'version' => '1.7',
 		'author' => true,
-		'internal' => false,
+		'internal' => true,
 		
 		/* Comment form */
 		'form-id-class' => '#commentform',
