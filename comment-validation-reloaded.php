@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.2.3
+ * Version: 0.2.4
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -145,7 +145,7 @@ function cvr_script() {
 		else
 			wp_enqueue_script( 'comment-validation', CVR_JS . '/validate.js', array( 'jquery' ), $v, true );
 		if ( $internal != false )
-			wp_enqueue_script( 'validation', CVR_JS . '/validation.js.php?id='.$id.'&amp;min='.$min.'&amp;v='.$v, array( 'jquery' ), $plugin_data['Version'], true );
+			wp_enqueue_script( 'validation', CVR_JS . '/validation.js.php?id='.$id.'&amp;min='.$min, array( 'jquery' ), $plugin_data['Version'], true );
 	endif;
 }
 

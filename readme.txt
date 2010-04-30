@@ -43,6 +43,12 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+**Version 0.2.4**
+
+* Fixed error where external code wasn't working
+	* Fixed [error](http://snipt.org/Lpmi) Thanks to [John Kolbert](http://www.johnkolbert.com/)
+* Use of external file will not validate correctly &amp; work ;)
+
 **Version 0.2.3**
 
 * Added check for singular post with comments open to enqueue scripts and style
@@ -72,6 +78,9 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 
 == Upgrade Notice ==
+
+= 0.2.4 =
+Validates &amp; external source is corrected.
 
 = 0.2.1 =
 Admin bug fix.
