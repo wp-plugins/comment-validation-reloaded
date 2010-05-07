@@ -43,13 +43,13 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
-**Version 0.2.4**
+= Version 0.2.4 =
 
 * Fixed error where external code wasn't working
 	* Fixed [error](http://snipt.org/Lpmi) Thanks to [John Kolbert](http://www.johnkolbert.com/)
 * Use of external file will not validate correctly &amp; work ;)
 
-**Version 0.2.3**
+= Version 0.2.3 =
 
 * Added check for singular post with comments open to enqueue scripts and style
 * Check for valication version
@@ -57,22 +57,22 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 	* Use internal if having issues (external is a php file with *header* JS
 	* Having issues with external javascript (trying to execute with PHP)...
 
-**Version 0.2.2**
+= Version 0.2.2 =
 
 * Setting page version update
 * Default version update
 
-**Version 0.2.1**
+= Version 0.2.1 =
 
 * Removed CDN(hosted) library in favor of version 1.7, which isn't hosted yet.
 * Bug fix
 
-**Version 0.2**
+= Version 0.2 =
 
 * Using CDN(hosted) library version 1.6
 * Added options to admin
 
-**Version 0.1**
+= Version 0.1 =
 
 * Initial release.
 
