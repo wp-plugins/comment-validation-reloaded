@@ -43,6 +43,10 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+= Version 0.2.5 =
+
+* Fixed XHTML in author link love.
+
 = Version 0.2.4 =
 
 * Fixed error where external code wasn't working

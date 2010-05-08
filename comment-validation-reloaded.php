@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.2.4
+ * Version: 0.2.5
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -219,7 +219,7 @@ function cvr_author() {
 	$author = $comm['author'];
 	
 	if ( $author != false && ( is_singular() && comments_open() ) )
-		echo '<span id="comment-validation-reloaded-author" style="font-size:80%;"><a href="http://austinpassy.com/wordpress-plugins/comment-validation-reloaded" title="WordPress Comment Validation Reloaded plugin">Comments</a> validated by <a href="http://twitter.com/thefrosty" title="Austin Passy on twitter">@TheFrosty</a></span>';
+		echo '<p id="comment-validation-reloaded-author" style="font-size:80%;"><a class="twitter-anywhere-user" href="http://austinpassy.com/wordpress-plugins/comment-validation-reloaded" title="WordPress Comment Validation Reloaded plugin">Comment validation by @<a href="http://twitter.com/thefrosty" title="Austin Passy on twitter">TheFrosty</a></p>';
 }
 
 /**
