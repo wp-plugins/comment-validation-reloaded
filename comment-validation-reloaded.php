@@ -219,7 +219,7 @@ function cvr_author() {
 	$author = $comm['author'];
 	
 	if ( $author != false && ( is_singular() && comments_open() ) )
-		echo '<p id="comment-validation-reloaded-author" style="font-size:80%;"><a class="twitter-anywhere-user" href="http://austinpassy.com/wordpress-plugins/comment-validation-reloaded" title="WordPress Comment Validation Reloaded plugin">Comment validation by @<a href="http://twitter.com/thefrosty" title="Austin Passy on twitter">TheFrosty</a></p>';
+		echo '<p id="comment-validation-reloaded-author" style="font-size:80%;"><a class="twitter-anywhere-user" href="http://austinpassy.com/wordpress-plugins/comment-validation-reloaded" title="WordPress Comment Validation Reloaded plugin">Comment validation</a> by @<a href="http://twitter.com/thefrosty" title="Austin Passy on twitter">TheFrosty</a></p>';
 }
 
 /**
