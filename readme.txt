@@ -43,6 +43,10 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+= Version 0.2.5.1 =
+
+* Minor update for anchor class.
+
 = Version 0.2.5 =
 
 * Fixed XHTML in author link love.
