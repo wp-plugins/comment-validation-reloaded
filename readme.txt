@@ -43,6 +43,11 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+= Version 0.2.6 =
+
+* Updated version numbers.
+* New version for external hosted script.
+
 = Version 0.2.5.1 =
 
 * Minor update for anchor class.
