@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.2.6
+ * Version: 0.2.7
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -227,43 +227,37 @@ function cvr_author() {
  * @since 0.1
  * @package Admin
  */
-if ( !function_exists( 'thefrosty_network_feed' ) ) :
-	function thefrosty_network_feed( $attr, $count ) {
-		
+if ( !function_exists( 'thefrosty_network_feed' ) ) {
+	function thefrosty_network_feed( $attr, $count ) {		
 		global $wpdb;
 		
-		include_once( ABSPATH . WPINC . '/rss.php' );
-		
-		$rss = fetch_rss( $attr );
-		
-		$items = array_slice( $rss->items, 0, '3' );
-		
-		echo '<div class="tab-content t' . $count . ' postbox open feed">';
-		
-		echo '<ul>';
-		
-		if ( empty( $items ) ) echo '<li>No items</li>';
-		
-		else
-		
-		foreach ( $items as $item ) : ?>
-		
-		<li>
-		
-		<a href='<?php echo $item[ 'link' ]; ?>' title='<?php echo $item[ 'description' ]; ?>'><?php echo $item[ 'title' ]; ?></a><br /> 
-		
-		<span style="font-size:10px; color:#aaa;"><?php echo date( 'F, j Y', strtotime( $item[ 'pubdate' ] ) ); ?></span>
-		
-		</li>
-		
-		<?php endforeach;
-		
-		echo '</ul>';
-		
+		include_once( ABSPATH . WPINC . '/class-simplepie.php' );
+		$feed = new SimplePie();
+		//$rss = array();
+		$feed->set_feed_url( $attr );
+		$feed->enable_cache( false );
+		$feed->init();
+		$feed->handle_content_type();
+		//$feed->set_cache_location( trailingslashit( ROLLA_ADMIN ) . 'cache' );
+
+		$items = $feed->get_item();
+		echo '<div class="t' . $count . ' tab-content postbox open feed">';		
+		echo '<ul>';		
+		if ( empty( $items ) ) { 
+			echo '<li>No items</li>';		
+		} else {
+			foreach( $feed->get_items( 0, 3 ) as $item ) : ?>		
+				<li>		
+					<a href='<?php echo $item->get_permalink(); ?>' title='<?php echo $item->get_description(); ?>'><?php echo $item->get_title(); ?></a><br /> 		
+					<span style="font-size:10px; color:#aaa;"><?php echo $item->get_date('F, jS Y | g:i a'); ?></span>		
+				</li>		
+			<?php endforeach;
+		}
+		//print_r( trailingslashit( ROLLA_ADMIN ) . 'cache' );
+		echo '</ul>';		
 		echo '</div>';
-		
 	}
-endif;
+}
 
 /**
  * Plugin Action /Settings on plugins page

@@ -3,7 +3,7 @@ Contributors: austyfrosty
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CN9BU5LAYCXV8
 Tags: comment, validation, comment validation, jquery validation, reloaded
 Requires at least: 2.7
-Tested up to: 3.0
+Tested up to: 3.1
 Stable tag: trunk
 
 
@@ -42,6 +42,10 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 
 == Changelog ==
+
+= Version 0.2.7 (2/9/11) =
+
+* Updated the feed parser to comply with deprecated `rss.php` and use `class-simplepie.php`
 
 = Version 0.2.6 =
 
