@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.2.8
+ * Version: 0.2.9
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -233,12 +233,11 @@ if ( !function_exists( 'thefrosty_network_feed' ) ) {
 		
 		include_once( ABSPATH . WPINC . '/class-simplepie.php' );
 		$feed = new SimplePie();
-		//$rss = array();
 		$feed->set_feed_url( $attr );
 		$feed->enable_cache( false );
 		$feed->init();
 		$feed->handle_content_type();
-		//$feed->set_cache_location( trailingslashit( ROLLA_ADMIN ) . 'cache' );
+		//$feed->set_cache_location( 'cache' );
 
 		$items = $feed->get_item();
 		echo '<div class="t' . $count . ' tab-content postbox open feed">';		
@@ -253,7 +252,6 @@ if ( !function_exists( 'thefrosty_network_feed' ) ) {
 				</li>		
 			<?php endforeach;
 		}
-		//print_r( trailingslashit( ROLLA_ADMIN ) . 'cache' );
 		echo '</ul>';		
 		echo '</div>';
 	}

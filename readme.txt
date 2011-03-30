@@ -43,6 +43,10 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+= Version 0.2.9 (3/30/11) =
+
+* Dashboard widget updated.
+
 = Version 0.2.8 (2/24/11) =
 
 * Removed javscript link causing hang-ups.
