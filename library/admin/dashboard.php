@@ -41,7 +41,7 @@ if ( !function_exists( 'thefrosty_dashboard_widget_rss' ) ) {
 				$feed->enable_cache( false );
 			} else {
 				$feed->enable_cache( true );
-				$feed->set_cache_location( plugin_dir_path( __FILE__ ) . 'cache' );
+				//$feed->set_cache_location( plugin_dir_path( __FILE__ ) . 'cache' );
 			}
 				
 			$feed->init();

@@ -74,13 +74,11 @@
 </div>
 
 
-<?php if ( $val['hide_ad'] ) : ''; else : ?>
 <div class="postbox ad">
-	<h3>
-		<script type='text/javascript' src='http://wpads.net/ads/js.php?type=link&amp;align=center&amp;zone=3'></script>
-    </h3>
+	
+		<iframe allowtransparency="true" src="http://austinpassy.com/custom-login.php" scrolling="no" style="height:50px;width:100%;">
+		</iframe><!-- .form-table -->
 </div>
-<?php endif; ?>
 
 
 <?php if ( $version3 == 'false' ) { //If it's less than version 3 ?>
@@ -209,17 +207,17 @@
 
 	<ul class="tabs">
     
-    	<li class="t1 t"><a>WordCampLA</a></li>
-    	<li class="t2 t"><a>Me!</a></li>
-    	<li class="t3 t"><a>wpWorkShop</a></li>
+    	<li class="t1 t"><a>Frosty</a></li>
+    	<li class="t2 t"><a>WordCampLA</a></li>
+    	<li class="t3 t"><a>Themelit</a></li>
         
 	</ul>
     
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://2010.wordcamp.la/feed', '1' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://2010.wordcamp.la/feed', '2' ); ?>
 
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://austinpassy.com/feed', '2' );	?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://austinpassy.com/feed', '1' );	?>
 
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://wpworkshop.la/feed', '3' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://themelit.com/feed', '3' ); ?>
     
 </div>
 </div>
@@ -231,10 +229,6 @@
         
 <div class="inside">
     <p style="text-align:justify;">If you really have to, use this <a href="../wp-content/plugins/comment-validation-reloaded/uninstall.php" title="Uninstall the Comment Validation Reloaded plugin with this script">script</a> to uninstall the plugin and completely remove all options from your WordPress database. <strong>Note:</strong> Will not work in WordPress 3.0+, simply deactivating the plugin will do :).</p>
-    
-    <p style="display:none;"><label for="<?php echo $data['hide_ad']; ?>">Hide ad?</label>
-    	&nbsp;<input id="<?php echo $data['hide_ad']; ?>" name="<?php echo $data['hide_ad']; ?>" type="checkbox" <?php if ( $val['hide_ad'] ) echo 'checked="checked"'; ?> value="true" />	Please only hide the ad if you've <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HA43MU7NT8NN2" title="Donate on PayPal" class="external">donated</a>.
-    </p>
     
 </div>
 </div>

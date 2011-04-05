@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.2.9
+ * Version: 0.3
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -23,35 +23,26 @@
  * Version 3.0 checker
  * @since 0.1
  */
- 	global $wp_db_version;
+ 	global $wp_version;
 	$version = 'false';
-	if ( $wp_db_version > 13000 ) {
+	if ( $wp_version >= '3.0' ) {
 		$version = 'true'; //Version 3.0 or greater!
 	}
 
 /**
- * Make sure we get the correct directory.
- * @since 0.1
- */
-	if ( !defined( 'WP_CONTENT_URL' ) )
-		define( 'WP_CONTENT_URL', get_option( 'siteurl' ) . '/wp-content' );
-	if ( !defined( 'WP_CONTENT_DIR' ) )
-		define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
-	if ( !defined( 'WP_PLUGIN_URL' ) )
-		define('WP_PLUGIN_URL', WP_CONTENT_URL. '/plugins' );
-	if ( !defined( 'WP_PLUGIN_DIR' ) )
-		define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
-
-/**
  * Define constant paths to the plugin folder.
  * @since 0.1
+ * @updated 0.3
  */
-	define( CVR, WP_PLUGIN_DIR . '/comment-validation-reloaded' );
-	define( CVR_URL, WP_PLUGIN_URL . '/comment-validation-reloaded' );
 	
-	define( CVR_ADMIN, WP_PLUGIN_DIR . '/comment-validation-reloaded/library/admin' );
-	define( CVR_CSS, WP_PLUGIN_URL . '/comment-validation-reloaded/library/css' );
-	define( CVR_JS, WP_PLUGIN_URL . '/comment-validation-reloaded/library/js' );
+	/* Set constant path to the Cleaner Gallery plugin directory. */
+	define( 'CVR', plugin_dir_path( __FILE__ ) );
+	define( 'CVR_ADMIN', CVR . '/library/admin/' );
+
+	/* Set constant path to the Cleaner Gallery plugin URL. */
+	define( 'CVR_URL', plugin_dir_url( __FILE__ ) );
+	define( 'CVR_CSS', CVR_URL . 'library/css/' );
+	define( 'CVR_JS', CVR_URL . 'library/js/' );
 
 /**
  * Add the settings page to the admin menu.
@@ -101,7 +92,7 @@ function cvr_admin_init() {
  */
 function cvr_add_pages() {
 	if ( function_exists( 'add_options_page' ) ) 
-		$page = add_options_page( 'Comment Validation Reloaded Settings', 'Validation Reloaded', 10, 'comment-validation-reloaded.php', comment_validation_reloaded_page );
+		$page = add_options_page( 'Comment Validation Reloaded Settings', 'Validation Reloaded', 'moderate_comments', 'comment-validation-reloaded.php', 'comment_validation_reloaded_page' );
 			add_action( 'admin_print_styles-' . $page, 'cvr_admin_style' );
 			add_action( 'admin_print_scripts-' . $page, 'cvr_admin_script' );
 }

@@ -27,9 +27,6 @@ function comment_validation_reloaded_settings_args() {
 		/* Comment form */
 		'form-id-class' => '#commentform',
 		'minimum' => '40',
-			
-		/* wpAd */	
-		'hide_ad' => false,
 	);
 	
 	return $settings_arr;
@@ -82,7 +79,7 @@ function comment_validation_reloaded_page() {
 	* If any information has been posted, we need
 	* to update the options in the database
 	*/
-	if ( $_POST[$hidden_field_name] == 'Y' ) :
+	if ( isset($_POST[$hidden_field_name]) && $_POST[$hidden_field_name] == 'Y' ) :
 
 		/*
 		* Loops through each option and sets it if needed
@@ -107,7 +104,7 @@ function comment_validation_reloaded_page() {
 		echo '</div>';
 		
 	
-	elseif ( $_POST[$hidden_field_name] == 'R') :
+	elseif ( isset($_POST[$hidden_field_name]) && $_POST[$hidden_field_name] == 'R') :
 
 		foreach($settings_arr as $key => $value) :
 			$settings[$key] = $val[$key] = $_POST[$data[$key]];

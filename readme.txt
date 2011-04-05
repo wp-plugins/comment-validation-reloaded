@@ -43,6 +43,14 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+= Version 0.3 (4/5/11) =
+
+* Updated multiple error when running WP_DEBUG.
+* Updated has_cap from `10` to role `moderate_comments`.
+* Updated constants.
+* Fixed dashboard cache error.
+* Removed outdated javascript that might cause hangups.
+
 = Version 0.2.9 (3/30/11) =
 
 * Dashboard widget updated.
