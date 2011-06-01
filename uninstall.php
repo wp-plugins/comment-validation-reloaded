@@ -13,18 +13,18 @@ if ( !is_user_logged_in() )
 if ( !current_user_can( 'install_plugins' ) )
 	wp_die( 'You do not have permission to run this script.' );
 
-if ( defined( 'UNINSTALL_COMM' ) )
-	wp_die( 'UNINSTALL_COMM set somewhere else! It must only be set in uninstall.php' );
+if ( defined( 'UNINSTALL_CVR' ) )
+	wp_die( 'UNINSTALL_CVR set somewhere else! It must only be set in uninstall.php' );
 
-define( 'UNINSTALL_COMM', '' );
+define( 'UNINSTALL_CVR', '' );
 
-if ( !defined( 'UNINSTALL_COMM' ) || constant( 'UNINSTALL_COMM' ) == '' ) 
-	wp_die( 'UNINSTALL_COMM must be set to a non-blank value in uninstall.php on line 29' );
+if ( !defined( 'UNINSTALL_CVR' ) || constant( 'UNINSTALL_CVR' ) == '' ) 
+	wp_die( 'UNINSTALL_CVR must be set to a non-blank value in uninstall.php on line 29' );
 
 ?>
 <p>This script will uninstall all options created by the <a href='http://austinpassy.com/wordpress-plugins/comment-validation-reloaded/'>Comment Validation Reloaded</a> plugin.</p>
 <?php
-if ( $_POST[ 'uninstall' ] ) {
+if ( $_POST['uninstall'] ) {
 	$plugins = (array)get_option( 'active_plugins' );
 	$key = array_search( 'comment-validation-reloaded/comment-validation-reloaded.php', $plugins );
 	if ( $key !== false ) {
@@ -35,8 +35,8 @@ if ( $_POST[ 'uninstall' ] ) {
 	}
 
 	if ( in_array( 'comment-validation-reloaded/comment-validation-reloaded.php', get_option( 'active_plugins' ) ) )
-		wp_die( 'Anywhere is still active. Please disable it on your plugins page first.' );
-	echo "<p><strong>Please comment out the UNINSTALL_COMM <em>define()</em> on line 29 in this file!</strong></p>";
+		wp_die( 'CVR is still active. Please disable it on your plugins page first.' );
+	echo "<p><strong>Please comment out the UNINSTALL_CVR <em>define()</em> on line 29 in this file!</strong></p>";
 	wp_mail( $current_user->user_email, 'Comment Validation Reloaded Uninstalled', '' );
 } else {
 	?>

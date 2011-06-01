@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.3
+ * Version: 0.3.1
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -49,6 +49,7 @@
  * @since 0.1
  */
 	add_action( 'init', 'cvr_admin_warnings' );
+	add_action( 'init', 'cvr_localize' );
 	add_action( 'admin_init', 'cvr_admin_init' );
 	add_action( 'admin_menu', 'cvr_add_pages' );
 	add_action( 'wp_print_scripts', 'cvr_script' );
@@ -77,6 +78,22 @@
  */
 	$comm = get_option( 'comment_validation_reloaded_settings' );
 
+/**
+ * WordPress 3.x check
+ *
+ * @since 0.8
+ */
+if ( ! function_exists( 'is_version' ) ) {
+	function is_version( $version = '3.0' ) {
+		global $wp_version;
+		
+		if ( version_compare( $wp_version, $version, '<' ) ) {
+			return false;
+		}
+		return true;
+	}
+}
+
  /**
  * Load the stylesheet
  * @since 0.1
@@ -86,6 +103,9 @@ function cvr_admin_init() {
 	wp_register_style( 'comment-validation-reloaded-admin', CVR_CSS . '/comment-validation-reloaded-admin.css' );
 }
 
+function cvr_localize() {
+	load_plugin_textdomain( 'cvr', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
 /**
  * Function to add the settings page
  * @since 0.1
@@ -123,21 +143,36 @@ function cvr_admin_script() {
  */
 function cvr_script() {
 	global $comm;
-	$active = $comm['activate'];
-	$v = $comm['version'];
-	$internal = $comm['internal'];
-	$name = $comm['form-id-class'];
-	$id = str_replace(array('#','.'),'',$name);
-	$min = $comm['minimum'];
+	$active 	= $comm['activate'];
+	$ver 		= $comm['version'];
+	$lang 		= $comm['language'];
+	$internal 	= $comm['internal'];
+	$name 		= $comm['form-id-class'];
+	$id 		= str_replace(array('#','.'),'',$name);
+	$min 		= $comm['minimum'];
 	
+	/*
 	if ( $active != false && ( is_singular() && comments_open() ) )  :
-		if ( $v == ( '1.6' || '1.7' ) )
-			wp_enqueue_script( 'comment-validation', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $v . '/jquery.validate.min.js', array( 'jquery' ), $v, true );
+		if ( $ver == ( '1.7' || '1.8.1' ) )
+			wp_enqueue_script( 'comment-validation', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/jquery.validate.min.js', array( 'jquery' ), $ver, true );
 		else
-			wp_enqueue_script( 'comment-validation', CVR_JS . '/validate.js', array( 'jquery' ), $v, true );
+			wp_enqueue_script( 'comment-validation', CVR_JS . '/validate.js', array( 'jquery' ), $ver, true );
 		if ( $internal != false )
 			wp_enqueue_script( 'validation', CVR_JS . '/validation.js.php?id='.$id.'&amp;min='.$min, array( 'jquery' ), $plugin_data['Version'], true );
 	endif;
+	*/
+	
+	if ( $active != false && ( is_singular() && comments_open() ) ) {
+		if ( $internal != false ) {
+			wp_enqueue_script( 'comment-validation', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/jquery.validate.min.js', array( 'jquery' ), $ver, true );
+			if ( !empty( $lang ) || $lang != '' )
+				wp_enqueue_script( 'comment-validation-localize', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/localization/messages_' . $lang . '.js', array( 'jquery' ), $ver, true );
+		} else {
+			wp_enqueue_script( 'comment-validation', CVR_JS . '/validate.min.js', array( 'jquery' ), '1.8.1', true );
+			if ( !empty( $lang ) || $lang != '' )
+				wp_enqueue_script( 'comment-validation-localize', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/localization/messages_' . $lang . '.js', array( 'jquery' ), $ver, true );
+		}
+	}
 }
 
 /**
@@ -146,16 +181,16 @@ function cvr_script() {
  */
 function cvr_options() {
 	global $comm;
-	$active = $comm['activate'];
-	$name = $comm['form-id-class'];
-	$min = $comm['minimum'];
-	$internal = $comm['internal'];
+	$active 	= $comm['activate'];
+	$name 		= $comm['form-id-class'];
+	$min 		= $comm['minimum'];
+	$internal 	= $comm['internal'];
 	
-	if ( ( $active != false && ( is_singular() && comments_open() ) ) && $internal != true )  : ?>
-<!-- Comment Validation Reloaded by Austin Passy of Frosty Web Designs -->
+	if ( ( $active != false && ( is_singular() && comments_open() ) ) )  : ?>
+<!-- Comment Validation Reloaded by Austin Passy (http://austinpassy.com) of Frosty Web Designs (http://frostywebdesigns.com) -->
 <script type="text/javascript">
 jQuery(function($) {
-	var errorContainer = $('<p class="error">Please fill out the required fields</p>').appendTo('<?php echo $name; ?>').hide();
+	var errorContainer = $('<p class="error"><?php _e( 'Please fill out the required fields', 'cvr' ); ?></p>').appendTo('<?php echo $name; ?>').hide();
 	var errorLabelContainer = $('<p class="error errorlabels"></p>').appendTo('<?php echo $name; ?>').hide();
 	$('<?php echo $name; ?>').validate({
 		rules: {
@@ -189,8 +224,8 @@ jQuery(function($) {
  */
 function cvr_css() { 
 	global $comm;
-	$active = $comm['activate'];
-	$name = $comm['form-id-class'];
+	$active 	= $comm['activate'];
+	$name 		= $comm['form-id-class'];
 	
 	if ( $active != false && ( is_singular() && comments_open() ) )  : ?>
 <style type="text/css">
@@ -222,13 +257,21 @@ if ( !function_exists( 'thefrosty_network_feed' ) ) {
 	function thefrosty_network_feed( $attr, $count ) {		
 		global $wpdb;
 		
+		$domain = preg_replace( '|https?://([^/]+)|', '$1', get_option( 'siteurl' ) );
+		
 		include_once( ABSPATH . WPINC . '/class-simplepie.php' );
 		$feed = new SimplePie();
 		$feed->set_feed_url( $attr );
-		$feed->enable_cache( false );
+		
+		if ( false !== strpos( $domain, '/' ) || 'localhost' == $domain || preg_match( '|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+|', $domain ) ) {
+			$feed->enable_cache( false );
+		} else {
+			$feed->enable_cache( true );
+			$feed->set_cache_location( plugin_dir_path( __FILE__ ) . 'admin/cache' );
+		}
+		
 		$feed->init();
 		$feed->handle_content_type();
-		//$feed->set_cache_location( 'cache' );
 
 		$items = $feed->get_item();
 		echo '<div class="t' . $count . ' tab-content postbox open feed">';		
@@ -273,22 +316,20 @@ function cvr_admin_warnings() {
 			global $comm;
 
 			if ( $comm['activate'] != true )
-				echo '<div id="comment-validation-reloaded-warning" class="updated fade"><p><strong>Comment Validation Reloaded plugin is not configured yet.</strong> It will not load until you update the <a href="' . admin_url( 'options-general.php?page=comment-validation-reloaded.php' ) . '">options</a>.</p></div>';
+				echo '<div id="comment-validation-reloaded-warning" class="updated fade"><p>' . __( '<strong>Comment Validation Reloaded plugin is not configured yet.</strong> It will not load until you update the <a href="' . admin_url( 'options-general.php?page=comment-validation-reloaded.php' ) . '">options</a>.', 'cvr' ) . '</p></div>';
 		}
 
 		add_action( 'admin_notices', 'cvr_warning' );
 		
-		/*
-		function cvr_wrong_settings() {
+		function cvr_needs_localize() {
 			global $comm;
 
-			if ( $comm[ 'hide_ad' ] != false )
-				echo '<div id="comment-validation-reloaded-warning" class="updated fade"><p><strong>You&prime;ve just hid the ad.</strong> Thanks for <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7329157" title="Donate on PayPal" class="external">donating</a>!</p></div>';
+			if ( WPLANG != '' && ( empty( $comm['language'] ) || $comm['language'] != '' ) )
+				echo '<div id="comment-validation-reloaded-warning" class="updated fade"><p><strong>' . __( 'Please set your Language on the settings page for the script to translate proper.', 'cvr' ) . '</strong></p></div>';
 		}
-		add_action( 'admin_notices', 'cvr_wrong_settings' );
-		*/
+		add_action( 'admin_notices', 'cvr_needs_localize' );
 
-return;
+	return;
 }
 
 ?>

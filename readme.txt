@@ -6,6 +6,7 @@ Requires at least: 2.7
 Tested up to: 3.2
 Stable tag: trunk
 
+Avoid those pesky blank page with an error message like "please fill out required fields" then loosing your/users comment info. Validation with javascript.
 
 == Description ==
 
@@ -42,6 +43,14 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 
 == Changelog ==
+
+= Version 0.3.1 (6/1/11) =
+
+* Set up whole plugin for translation.
+* New version of validation script version.
+* Added translatable jQuery script, please visit settings to change!
+* Fixed error when setting validator to external didn't validate.
+* Getting ready for plugin overhaul.
 
 = Version 0.3 (4/5/11) =
 

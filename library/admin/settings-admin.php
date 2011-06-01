@@ -19,14 +19,15 @@
 function comment_validation_reloaded_settings_args() {
 	$settings_arr = array(
 		/* Activate */
-		'activate' => false,
-		'version' => '1.7',
-		'author' => true,
-		'internal' => true,
+		'activate'	=> false,
+		'version'	=> '1.7',
+		'author'	=> true,
+		'internal'	=> true,
+		'language'	=> '',
 		
 		/* Comment form */
 		'form-id-class' => '#commentform',
-		'minimum' => '40',
+		'minimum'		=> '40',
 	);
 	
 	return $settings_arr;
@@ -100,7 +101,7 @@ function comment_validation_reloaded_page() {
 		if ( function_exists('screen_icon') ) screen_icon();
 		echo '<h2>' . $settings_page_title . '</h2>';
 		echo '<div class="updated" style="margin:15px 0;">';
-		echo '<p><strong>Don&prime;t you feel good. You just saved me!</strong></p>';
+		_e( '<p><strong>Don&prime;t you feel good. You just saved me!</strong></p>', 'cvr' );
 		echo '</div>';
 		
 	
@@ -119,7 +120,7 @@ function comment_validation_reloaded_page() {
 		if ( function_exists('screen_icon') ) screen_icon();
 		echo '<h2>' . $settings_page_title . '</h2>';
 		echo '<div class="updated" style="margin:15px 0;">';
-		echo '<p><strong>Oh no! I&prime;ve been reset.</strong></p>';
+		_e( '<p><strong>Oh no! I&prime;ve been reset.</strong></p>', 'cvr' );
 		echo '</div>';
 
 	else :
@@ -138,7 +139,7 @@ function comment_validation_reloaded_page() {
 					<?php require_once( CVR_ADMIN . '/settings.php' ); ?>
 
 					<p class="submit" style="float:left;">
-						<input type="submit" name="Submit"  class="button-primary" value="Save Changes" />
+						<input type="submit" name="Submit"  class="button-primary" value="<?php _e( 'Save Changes', 'cvr' ); ?>" />
 						<input type="hidden" name="<?php echo $hidden_field_name; ?>" value="Y" />
 					</p>
 
@@ -147,7 +148,7 @@ function comment_validation_reloaded_page() {
                 <form name="form1" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>" style="border:none;background:transparent;">
                 
                     <p class="submit" style="float:left; margin-left:10px;">
-                        <input type="submit" name="Reset" class="swg_warning" value="Delete/Reset" onclick="return confirm('Do you really want to delete/reset the plugin settings?');" />
+                        <input type="submit" name="Reset" class="swg_warning" value="Delete/Reset" onclick="return confirm('<?php _e( 'Do you really want to delete/reset the plugin settings?', 'cvr' ); ?>');" />
                         <input type="hidden" name="<?php echo $hidden_field_name; ?>" value="R" />
                     </p>
             
