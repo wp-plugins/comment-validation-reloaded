@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.3.1
+ * Version: 0.3.2
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -324,8 +324,8 @@ function cvr_admin_warnings() {
 		function cvr_needs_localize() {
 			global $comm;
 
-			if ( WPLANG != '' && ( empty( $comm['language'] ) || $comm['language'] != '' ) )
-				echo '<div id="comment-validation-reloaded-warning" class="updated fade"><p><strong>' . __( 'Please set your Language on the settings page for the script to translate proper.', 'cvr' ) . '</strong></p></div>';
+			if ( WPLANG != '' && ( empty( $comm['language'] ) || $comm['language'] == '' ) )
+				echo '<div id="comment-validation-reloaded-warning" class="updated fade"><p><strong>' . sprintf( __( 'Please set your <a href="%1$s">Language</a> on the <a href="%1$s">settings</a> page for the script to translate proper.', 'cvr' ), admin_url( 'options-general.php?page=comment-validation-reloaded.php' ) ) . '</strong></p></div>';
 		}
 		add_action( 'admin_notices', 'cvr_needs_localize' );
 

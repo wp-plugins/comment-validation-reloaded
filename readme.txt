@@ -44,6 +44,10 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+= Version 0.3.2 (6/7/11) =
+
+* Bug fix for WordPress installs that have `WPLANG` defined.
+
 = Version 0.3.1 (6/1/11) =
 
 * Set up whole plugin for translation.
