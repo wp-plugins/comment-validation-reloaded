@@ -44,6 +44,10 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+= Version 0.3.4 (9/8/11) =
+
+* Dashboard fix.
+
 = Version 0.3.3 (6/23/11) =
 
 * [BUG FIX] An error in the dashboard widget is casuing some large images. Sorry. Always escape.
