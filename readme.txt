@@ -3,7 +3,7 @@ Contributors: austyfrosty
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CN9BU5LAYCXV8
 Tags: comment, validation, comment validation, jquery validation, reloaded
 Requires at least: 2.7
-Tested up to: 3.2
+Tested up to: 3.3
 Stable tag: trunk
 
 Avoid those pesky blank page with an error message like "please fill out required fields" then loosing your/users comment info. Validation with javascript.
@@ -43,6 +43,11 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 
 == Changelog ==
+
+= Version 0.3.5 (11/8/11) =
+
+* Feeds updated.
+* WordPress 3.3 check.
 
 = Version 0.3.4 (9/8/11) =
 

@@ -218,17 +218,17 @@
 
 	<ul class="tabs">
     
-    	<li class="t1 t"><a>Frosty</a></li>
+    	<li class="t1 t"><a>TheFrosty</a></li>
     	<li class="t2 t"><a>WordCampLA</a></li>
-    	<li class="t3 t"><a>Themelit</a></li>
+    	<li class="t3 t"><a>Austin Passy</a></li>
         
 	</ul>
     
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/WordCampLA', '2' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/TheFrosty', '2' ); ?>
 
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/TheFrosty', '1' );	?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/WordCampLA', '1' );	?>
 
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://themelit.com/feed', '3' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/AustinPassy', '3' ); ?>
     
 </div>
 </div>
