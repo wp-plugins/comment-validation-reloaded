@@ -44,6 +44,12 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 == Changelog ==
 
+= Version 0.3.6 (11/14/11) =
+
+* Updated validation script to 1.9.
+* Moved inline jQuery into redirect script.
+	-fixed so script loads after validation function.
+
 = Version 0.3.5 (11/8/11) =
 
 * Feeds updated.

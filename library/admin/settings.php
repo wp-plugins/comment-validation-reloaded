@@ -43,6 +43,7 @@
                     <option value="1.6" <?php if ( $val['version'] == '1.7' ) echo ' selected="selected"'; ?>>1.7</option>
                     <option value="1.8" <?php if ( $val['version'] == '1.8' ) echo ' selected="selected"'; ?>>1.8</option>
                     <option value="1.8.1" <?php if ( $val['version'] == '1.8.1' ) echo ' selected="selected"'; ?>>1.8.1</option>
+                    <option value="1.9" <?php if ( $val['version'] == '1.9' ) echo ' selected="selected"'; ?>>1.9</option>
                 </select>
             </td>
         </tr>
@@ -179,7 +180,7 @@
 	<table class="form-table">
 
 	<tr>
-		<th style="width:20%;"<?php _e( '>Donate:', 'cvr' ); ?></th>
+		<th style="width:20%;"><?php _e( '>Donate:', 'cvr' ); ?></th>
 		<td><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=CN9BU5LAYCXV8" title="Donate on PayPal" class="external"><?php _e( 'PayPal', 'cvr' ); ?></a>.</td>
 	</tr>
 	<tr>
@@ -205,6 +206,8 @@
         
 		<li><?php _e( 'Need a WP expert?', 'cvr' ); ?> <a href="http://frostywebdesigns.com/" title="Frosty Web Designs" class="external"><?php _e( 'Hire me', 'cvr' ); ?></a>.</li>
         
+		<li><?php _e( 'Looking for a WordPress theme?', 'cvr' ); ?> <a href="http://fxthemes.com/" title="FxThemes" class="external">FxThemes</a>.</li>
+        
 	</ul>
     
 </div>
@@ -218,17 +221,17 @@
 
 	<ul class="tabs">
     
-    	<li class="t1 t"><a>TheFrosty</a></li>
+    	<li class="t1 t"><a>Austin Passy</a></li>
     	<li class="t2 t"><a>WordCampLA</a></li>
-    	<li class="t3 t"><a>Austin Passy</a></li>
+    	<li class="t3 t"><a>FxThemes</a></li>
         
 	</ul>
     
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/TheFrosty', '2' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/FXThemes', '3' ); ?>
 
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/WordCampLA', '1' );	?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/WordCampLA', '2' );	?>
 
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/AustinPassy', '3' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/AustinPassy', '1' ); ?>
     
 </div>
 </div>

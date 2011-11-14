@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.3.5
+ * Version: 0.3.6
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -53,8 +53,10 @@
 	add_action( 'admin_init', 'cvr_admin_init' );
 	add_action( 'admin_menu', 'cvr_add_pages' );
 	add_action( 'wp_print_scripts', 'cvr_script' );
+	add_filter( 'query_vars', 'cvr_query_var' );
+	add_action( 'template_redirect', 'cvr_options' );
 	add_action( 'wp_head', 'cvr_css' );
-	add_action( 'wp_footer', 'cvr_options' );
+	//add_action( 'wp_footer', 'cvr_options' );
 	add_action( 'comment_form', 'cvr_author' );
 
 /**
@@ -165,14 +167,18 @@ function cvr_script() {
 	if ( $active != false && ( is_singular() && comments_open() ) ) {
 		if ( $internal != false ) {
 			wp_enqueue_script( 'comment-validation', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/jquery.validate.min.js', array( 'jquery' ), $ver, true );
-			if ( !empty( $lang ) || $lang != '' )
-				wp_enqueue_script( 'comment-validation-localize', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/localization/messages_' . $lang . '.js', array( 'jquery' ), $ver, true );
 		} else {
-			wp_enqueue_script( 'comment-validation', CVR_JS . '/validate.min.js', array( 'jquery' ), '1.8.1', true );
-			if ( !empty( $lang ) || $lang != '' )
-				wp_enqueue_script( 'comment-validation-localize', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/localization/messages_' . $lang . '.js', array( 'jquery' ), $ver, true );
+			wp_enqueue_script( 'comment-validation', CVR_JS . '/validate.min.js', array( 'jquery' ), '1.9', true );
 		}
+		wp_enqueue_script( 'comment-validation-validate', add_query_arg( array( 'comment-validation' => '1' ), trailingslashit( home_url() ) ), array( 'jquery' ), null, true );
+		if ( !empty( $lang ) || $lang != '' )
+			wp_enqueue_script( 'comment-validation-localize', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/localization/messages_' . $lang . '.js', array( 'jquery' ), $ver, true );
 	}
+}
+
+function cvr_query_var( $vars ) {
+	$vars[] = 'comment-validation';
+	return $vars;
 }
 
 /**
@@ -181,18 +187,22 @@ function cvr_script() {
  */
 function cvr_options() {
 	global $comm;
+	
 	$active 	= $comm['activate'];
 	$name 		= $comm['form-id-class'];
 	$min 		= $comm['minimum'];
 	$internal 	= $comm['internal'];
+	$error_text = __( 'Please fill out the required fields', 'cvr' );
+	$min = ( $min != '' ) ? 'minlength: ' . $min : '';
 	
-	if ( ( $active != false && ( is_singular() && comments_open() ) ) )  : ?>
-<!-- Comment Validation Reloaded by Austin Passy (http://austinpassy.com) of Frosty Web Designs (http://frostywebdesigns.com) -->
-<script type="text/javascript">
-jQuery(function($) {
-	var errorContainer = $('<p class="error"><?php _e( 'Please fill out the required fields', 'cvr' ); ?></p>').appendTo('<?php echo $name; ?>').hide();
-	var errorLabelContainer = $('<p class="error errorlabels"></p>').appendTo('<?php echo $name; ?>').hide();
-	$('<?php echo $name; ?>').validate({
+	if ( intval( get_query_var( 'comment-validation' ) ) == 1 ) {
+		
+		header("content-type:application/x-javascript");
+
+		echo "jQuery(function($) {
+	var errorContainer = $('<p class=\"error\">$error_text</p>').appendTo('$name').hide();
+	var errorLabelContainer = $('<p class=\"error errorlabels\"></p>').appendTo('$name').hide();
+	$('$name').validate({
 		rules: {
 			author: 'required',
 			email: {
@@ -202,7 +212,7 @@ jQuery(function($) {
 			url: 'url',
 			comment: {
 				required: true,
-				<?php if ( $min != '' ) echo 'minlength: ' . $min; ?>
+				$min
 			}
 		},
 		errorContainer: errorContainer,
@@ -213,10 +223,10 @@ jQuery(function($) {
 	$.validator.messages.required = '' + $.validator.messages.required;
 	$.validator.messages.email = '&raquo; ' + $.validator.messages.email;
 	$.validator.messages.url = '&raquo; ' + $.validator.messages.url;
-});
-</script>
-<!-- /Comment Validation Reloaded -->
-<?php endif;
+});";
+		exit;	
+	}
+	return false;
 }
 
 /**
