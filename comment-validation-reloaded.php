@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.3.6
+ * Version: 0.3.7
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -192,7 +192,7 @@ function cvr_options() {
 	$name 		= $comm['form-id-class'];
 	$min 		= $comm['minimum'];
 	$internal 	= $comm['internal'];
-	$error_text = __( 'Please fill out the required fields', 'cvr' );
+	$error_text = apply_filters( 'cvr_required_feilds_text', __( 'Please fill out the required fields', 'cvr' ) );
 	$min = ( $min != '' ) ? 'minlength: ' . $min : '';
 	
 	if ( intval( get_query_var( 'comment-validation' ) ) == 1 ) {

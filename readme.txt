@@ -32,7 +32,7 @@ Because there is a newer validation script out there, but no updated plugins.
 
 
 = I think i want to uninstall but... =
-Be sure to click the uninstall script that you **manually** add a value to `define( 'UNINSTALL_COMM', '' )` on line 29. That means `1` OR like this: `define( 'UNINSTALL_COMM', '1' )`. After that run the script and all options should be uninstalled. **Note: This script will only work for WordPress 3.0 or less**
+Just delete the plugin.
 
 
 == Screenshots ==
@@ -43,6 +43,11 @@ Be sure to click the uninstall script that you **manually** add a value to `defi
 
 
 == Changelog ==
+
+= Version 0.3.7 (11/15/11) =
+
+* Added filter for *required fields text* `cvr_required_feilds_text`.
+* Removed `uninstall.php`
 
 = Version 0.3.6 (11/14/11) =
 
