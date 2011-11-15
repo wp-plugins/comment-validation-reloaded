@@ -180,7 +180,7 @@
 	<table class="form-table">
 
 	<tr>
-		<th style="width:20%;"><?php _e( '>Donate:', 'cvr' ); ?></th>
+		<th style="width:20%;"><?php _e( 'Donate:', 'cvr' ); ?></th>
 		<td><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=CN9BU5LAYCXV8" title="Donate on PayPal" class="external"><?php _e( 'PayPal', 'cvr' ); ?></a>.</td>
 	</tr>
 	<tr>
