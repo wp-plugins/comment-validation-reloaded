@@ -44,9 +44,14 @@ Just delete the plugin.
 
 == Changelog ==
 
+= Version 0.3.8 (11/17/11) =
+
+* Spelled fields wrong in the filter.
+* Updated localization to not output when in english.
+
 = Version 0.3.7 (11/15/11) =
 
-* Added filter for *required fields text* `cvr_required_feilds_text`.
+* Added filter for *required fields text* `cvr_required_fields_text`.
 * Removed `uninstall.php`
 
 = Version 0.3.6 (11/14/11) =
