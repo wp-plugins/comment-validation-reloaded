@@ -44,6 +44,10 @@ Just delete the plugin.
 
 == Changelog ==
 
+= Version 0.3.9 (12/25/11) =
+
+* Fixed script causing server error on singluar pages.
+
 = Version 0.3.8.1 (12/19/11) =
 
 * Fixed broken translation output file.
@@ -157,6 +161,9 @@ Just delete the plugin.
 
 
 == Upgrade Notice ==
+
+=  0.3.9 =
+Very important, upgrade from `0.3.8.1`, must install!!
 
 = 0.2.4 =
 Validates &amp; external source is corrected.
