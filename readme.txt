@@ -44,6 +44,10 @@ Just delete the plugin.
 
 == Changelog ==
 
+= Version 0.3.8.1 (12/19/11) =
+
+* Fixed broken translation output file.
+
 = Version 0.3.8 (11/17/11) =
 
 * Spelled fields wrong in the filter.

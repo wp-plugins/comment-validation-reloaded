@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.3.8
+ * Version: 0.3.8.1
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -170,8 +170,8 @@ function cvr_script() {
 		} else {
 			wp_enqueue_script( 'comment-validation', CVR_JS . '/validate.min.js', array( 'jquery' ), '1.9', true );
 		}
-		wp_enqueue_script( 'comment-validation-validate', add_query_arg( array( 'comment-validation' => '1' ), trailingslashit( home_url() ) ), array( 'jquery' ), null, true );
-		if ( !empty( $lang ) || $lang != '' || $lang != 'en' )
+		wp_enqueue_script( 'comment-validation-validate', add_query_arg( array( 'comment-validation' => '1' ), trailingslashit( home_url() ) ), array( 'jquery', 'comment-validation-validate' ), null, true );
+		if ( !empty( $lang ) && ( $lang != '' || $lang != 'en' ) )
 			wp_enqueue_script( 'comment-validation-localize', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/localization/messages_' . $lang . '.js', array( 'jquery' ), $ver, true );
 	}
 }
