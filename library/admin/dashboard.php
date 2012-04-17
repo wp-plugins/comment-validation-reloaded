@@ -25,9 +25,10 @@ if ( !function_exists( 'thefrosty_dashboard_widget_rss' ) ) {
 			$style .= 'span.jeanaarter { background-position: -60px 0 !important }' . "\n";
 			$style .= 'span.wordcamp { background-position: -92px 0 !important }' . "\n";
 			$style .= 'span.floatoholics { background-position: -124px 0 !important }' . "\n";
-			$style .= 'span.fxthemes { background-position: -156px 0 !important }' . "\n";
+			$style .= 'span.thefrosty { background-position: -156px 0 !important }' . "\n";
 			$style .= 'span.greatescapecabofishing { background-position: -193px 0 !important }' . "\n";
 			$style .= 'span.wpworkshop { background-position: -221px 0 !important }' . "\n";
+			$style .= 'span.infieldbox { background-position: -251px 0 !important }' . "\n";
 			$style .= '</style>' . "\n";
 			
 			$domain = preg_replace( '|https?://([^/]+)|', '$1', get_option( 'siteurl' ) );
@@ -37,12 +38,8 @@ if ( !function_exists( 'thefrosty_dashboard_widget_rss' ) ) {
 			
 			$feed->set_feed_url( 'http://pipes.yahoo.com/pipes/pipe.run?_id=52c339c010550750e3e64d478b1c96ea&_render=rss' );
 			
-			if ( false !== strpos( $domain, '/' ) || 'localhost' == $domain || preg_match( '|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+|', $domain ) ) {
-				$feed->enable_cache( false );
-			} else {
-				$feed->enable_cache( true );
-				$feed->set_cache_location( plugin_dir_path( __FILE__ ) . 'cache' );
-			}
+			$feed->enable_cache( true );
+			$feed->set_cache_location( plugin_dir_path( __FILE__ ) . 'cache' );
 				
 			$feed->init();
 			$feed->handle_content_type();
@@ -70,11 +67,11 @@ if ( !function_exists( 'thefrosty_dashboard_widget_rss' ) ) {
 					// Redundant, I know. Can you make a preg_replace for this? ?>
                     
                     <div class="frosty-image">
-                    	<span class="<?php echo strtolower( $class ); ?>">&nbsp;</span>
+                    	<span class="<?php echo strtolower( esc_attr( $class ) ); ?>">&nbsp;</span>
                     </div>
-					<li>		
-						<a class="rsswidget" href="<?php echo esc_url( $item->get_permalink() ); ?>" title="<?php echo esc_attr( $item->get_description() ); ?>"><?php echo esc_attr( $item->get_title() ); ?></a>		
-						<span style="font-size:10px; color:#aaa;"><?php echo esc_attr( $item->get_date('F, jS Y') ); ?></span>			
+					<li>
+						<a class="rsswidget" href="<?php echo esc_url( $item->get_permalink() ); ?>" title="<?php esc_attr_e( $item->get_description() ); ?>"><?php esc_attr_e( $item->get_title() ); ?></a>		
+						<span style="font-size:10px; color:#aaa;"><?php echo esc_html( $item->get_date('F, jS Y') ); ?></span>			
 					</li>		
 				<?php endforeach;
 			}

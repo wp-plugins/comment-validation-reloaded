@@ -23,7 +23,7 @@ if ( $min != "" )
 	$minout = 'minlength: ' . $min;
 
 	$output = '<script type="text/javascript">
-	jQuery(function($) {
+	jQuery(document).ready( function($) {
 		var errorContainer = $("<p class=\'error\'>' . __( 'Please fill out the required fields', 'cvr' ) . '</p>").appendTo("#' . $id . '").hide();
 		var errorLabelContainer = $("<p class=\'error errorlabels\'></p>").appendTo("#' . $id . '").hide();
 		$("#' . $id . '").validate({
@@ -50,7 +50,7 @@ if ( $min != "" )
 	});
 	</script>';
 	
-	$outputmin = '<script type="text/javascript">jQuery(function($){var errorContainer=$("<p class=\'error\'>' . __( 'Please fill out the required fields', 'cvr' ) . '</p>").appendTo("#' . $id . '").hide();var errorLabelContainer=$("<p class=\'error errorlabels\'></p>").appendTo("#' . $id . '").hide();$("#' . $id . '").validate({rules:{author:"required",email:{required:true,email:true},url:"url",comment:{required:true,' . $minout . '}},errorContainer:errorContainer,errorLabelContainer:errorLabelContainer,ignore:":hidden"});$.validator.messages.required=""+$.validator.messages.required;$.validator.messages.email="&raquo; "+$.validator.messages.email;$.validator.messages.url="&raquo; "+$.validator.messages.url;});</script>';
+	$outputmin = '<script type="text/javascript">jQuery(document).ready( function($){var errorContainer=$("<p class=\'error\'>' . __( 'Please fill out the required fields', 'cvr' ) . '</p>").appendTo("#' . $id . '").hide();var errorLabelContainer=$("<p class=\'error errorlabels\'></p>").appendTo("#' . $id . '").hide();$("#' . $id . '").validate({rules:{author:"required",email:{required:true,email:true},url:"url",comment:{required:true,' . $minout . '}},errorContainer:errorContainer,errorLabelContainer:errorLabelContainer,ignore:":hidden"});$.validator.messages.required=""+$.validator.messages.required;$.validator.messages.email="&raquo; "+$.validator.messages.email;$.validator.messages.url="&raquo; "+$.validator.messages.url;});</script>';
 	
 	return "document.write('" . comm_js($outputmin) . "');";
 	//echo comm_js($outputmin);

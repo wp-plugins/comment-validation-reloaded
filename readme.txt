@@ -44,6 +44,12 @@ Just delete the plugin.
 
 == Changelog ==
 
+= Version 0.4 (04/17/12) =
+
+* Fixed jQuery script to run on document ready.
+* Updated Sprite
+* Updated dashboard cache issues.
+
 = Version 0.3.9 (12/25/11) =
 
 * Fixed script causing server error on singluar pages.
