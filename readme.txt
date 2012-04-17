@@ -20,7 +20,7 @@ Avoid those pesky blank page with an error message like &ldquo;please fill out r
 
 Follow the steps below to install the plugin.
 
-1. Upload the `anywhere` folder to the /wp-content/plugins/ directory.
+1. Upload the `comment-validation-reloaded` folder to the /wp-content/plugins/ directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Go to Settings/Validation Reloaded to edit your settings.
 
