@@ -39,7 +39,9 @@ if ( !function_exists( 'thefrosty_dashboard_widget_rss' ) ) {
 			$feed->set_feed_url( 'http://pipes.yahoo.com/pipes/pipe.run?_id=52c339c010550750e3e64d478b1c96ea&_render=rss' );
 			
 			$feed->enable_cache( true );
-			$feed->set_cache_location( plugin_dir_path( __FILE__ ) . 'cache' );
+			$cache_folder = plugin_dir_path( __FILE__ ) . 'cache';
+			if ( !is_writable( $cache_folder ) ) chmod( $cache_folder, 0666 );
+			$feed->set_cache_location( $cache_folder );
 				
 			$feed->init();
 			$feed->handle_content_type();

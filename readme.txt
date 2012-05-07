@@ -44,6 +44,10 @@ Just delete the plugin.
 
 == Changelog ==
 
+= Version 0.4.1 (05/07/12)
+
+* If the cache forlder isn't writeable, chmod `666` to avoid errors.
+
 = Version 0.4 (04/17/12) =
 
 * Fixed jQuery script to run on document ready.

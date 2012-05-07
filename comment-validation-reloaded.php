@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.4
+ * Version: 0.4.1
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -270,18 +270,14 @@ if ( !function_exists( 'thefrosty_network_feed' ) ) {
 	function thefrosty_network_feed( $attr, $count ) {		
 		global $wpdb;
 		
-		$domain = preg_replace( '|https?://([^/]+)|', '$1', get_option( 'siteurl' ) );
-		
 		include_once( ABSPATH . WPINC . '/class-simplepie.php' );
 		$feed = new SimplePie();
 		$feed->set_feed_url( $attr );
 		
-		if ( false !== strpos( $domain, '/' ) || 'localhost' == $domain || preg_match( '|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+|', $domain ) ) {
-			$feed->enable_cache( false );
-		} else {
-			$feed->enable_cache( true );
-			$feed->set_cache_location( plugin_dir_path( __FILE__ ) . 'admin/cache' );
-		}
+		$feed->enable_cache( true );
+		$cache_folder = plugin_dir_path( __FILE__ ) . 'admin/cache';
+		if ( !is_writable( $cache_folder ) ) chmod( $cache_folder, 0666 );
+		$feed->set_cache_location( $cache_folder );
 		
 		$feed->init();
 		$feed->handle_content_type();
