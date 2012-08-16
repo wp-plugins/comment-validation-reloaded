@@ -44,6 +44,10 @@ Just delete the plugin.
 
 == Changelog ==
 
+= Version 0.4.2 (08/16/12)
+
+* Updated admin feeds.
+
 = Version 0.4.1 (05/07/12)
 
 * If the cache forlder isn't writeable, chmod `666` to avoid errors.

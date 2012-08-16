@@ -221,13 +221,13 @@
 
 	<ul class="tabs">
     
-    	<li class="t1 t"><a>Austin Passy</a></li>
-    	<li class="t2 t"><a>WordCampLA</a></li>
-    	<li class="t3 t"><a>FxThemes</a></li>
+    	<li class="t1 t"><a><?php _e( 'Austin Passy', 'cvr' ); ?></a></li>
+    	<li class="t2 t"><a><?php _e( 'WordCamp LA', 'cvr' ); ?></a></li>
+    	<li class="t3 t"><a><?php _e( 'Infield Box', 'cvr' ); ?></a></li>
         
 	</ul>
     
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/FXThemes', '3' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://infieldbox.com/feed', '3' ); ?>
 
 		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/WordCampLA', '2' );	?>
 
