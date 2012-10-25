@@ -44,6 +44,11 @@ Just delete the plugin.
 
 == Changelog ==
 
+= Version 0.4.3 (10/25/12)
+
+* Update validate script to latest version.
+* Update options in settings page to choose latest external CDN hosted version.
+
 = Version 0.4.2 (08/16/12)
 
 * Updated admin feeds.
@@ -175,6 +180,9 @@ Just delete the plugin.
 
 
 == Upgrade Notice ==
+
+=  0.4.3 =
+Update the version number if using CDN hosted javascript. Go to the settings page to update. Latest version `1.10.0`.
 
 =  0.3.9 =
 Very important, upgrade from `0.3.8.1`, must install!!

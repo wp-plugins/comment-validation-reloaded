@@ -9,11 +9,6 @@
  *
  * @package CommentValidationReloaded
  */
- 	global $wp_version, $wp_db_version;
-	$version3 = 'false';
-	if ( $wp_db_version > 13000 ) {
-		$version3 = 'true'; //Version 3.0 or greater!
-	}
 ?>
 <!-- Left Sidebar -->
 <div id="left" style="float:left; width:66%;">
@@ -44,6 +39,7 @@
                     <option value="1.8" <?php if ( $val['version'] == '1.8' ) echo ' selected="selected"'; ?>>1.8</option>
                     <option value="1.8.1" <?php if ( $val['version'] == '1.8.1' ) echo ' selected="selected"'; ?>>1.8.1</option>
                     <option value="1.9" <?php if ( $val['version'] == '1.9' ) echo ' selected="selected"'; ?>>1.9</option>
+                    <option value="1.10.0" <?php if ( $val['version'] == '1.10.0' ) echo ' selected="selected"'; ?>>1.10.0</option>
                 </select>
             </td>
         </tr>
@@ -91,10 +87,6 @@
 		<iframe allowtransparency="true" src="http://austinpassy.com/custom-login.php" scrolling="no" style="height:50px;width:100%;">
 		</iframe><!-- .form-table -->
 </div>
-
-
-<?php if ( $version3 == 'false' ) { //If it's less than version 3 ?>
-<?php } ?>
 
 <div class="postbox open">
 
@@ -206,7 +198,7 @@
         
 		<li><?php _e( 'Need a WP expert?', 'cvr' ); ?> <a href="http://frostywebdesigns.com/" title="Frosty Web Designs" class="external"><?php _e( 'Hire me', 'cvr' ); ?></a>.</li>
         
-		<li><?php _e( 'Looking for a WordPress theme?', 'cvr' ); ?> <a href="http://fxthemes.com/" title="FxThemes" class="external">FxThemes</a>.</li>
+		<li><?php _e( 'Looking for a WordPress plugin?', 'cvr' ); ?> <a href="http://thefrosty.com/" title="TheFrosty" class="external">Frosty plugins</a>.</li>
         
 	</ul>
     

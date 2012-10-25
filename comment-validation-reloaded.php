@@ -1,9 +1,9 @@
 <?php
 /*
  * Plugin Name: Comment Validation Reloaded
- * Plugin URI: http://austinpassy.com//wordpress-plugins/comment-validation-reloaded
+ * Plugin URI: http://austinpassy.com/wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.4.2
+ * Version: 0.4.3
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -18,16 +18,6 @@
  *
  * @package CommentValidationReloaded
  */
-
-/**
- * Version 3.0 checker
- * @since 0.1
- */
- 	global $wp_version;
-	$version = 'false';
-	if ( $wp_version >= '3.0' ) {
-		$version = 'true'; //Version 3.0 or greater!
-	}
 
 /**
  * Define constant paths to the plugin folder.
@@ -86,7 +76,7 @@
  * @since 0.8
  */
 if ( ! function_exists( 'is_version' ) ) {
-	function is_version( $version = '3.0' ) {
+	function is_version( $version = '3.4' ) {
 		global $wp_version;
 		
 		if ( version_compare( $wp_version, $version, '<' ) ) {
@@ -165,17 +155,22 @@ function cvr_script() {
 	*/
 	
 	if ( $active != false && ( is_singular() && comments_open() ) ) {
+		
 		if ( $internal != false ) {
 			wp_register_script( 'comment-validation', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/jquery.validate.min.js', array( 'jquery' ), $ver, true );
 			wp_enqueue_script( 'comment-validation' );
 		} else {
-			wp_register_script( 'comment-validation', CVR_JS . '/validate.min.js', array( 'jquery' ), '1.9', true );
+			wp_register_script( 'comment-validation', CVR_JS . '/validate.min.js', array( 'jquery' ), '1.11', true );
 			wp_enqueue_script( 'comment-validation' );
 		}
+		
 		wp_register_script( 'comment-validation-validate', add_query_arg( array( 'comment-validation' => '1' ), trailingslashit( home_url() ) ), array( 'jquery', 'comment-validation' ), null, true );
+		
 		wp_enqueue_script( 'comment-validation-validate' );
+		
 		if ( !empty( $lang ) && ( $lang != '' || $lang != 'en' ) )
 			wp_enqueue_script( 'comment-validation-localize', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/localization/messages_' . $lang . '.js', array( 'jquery' ), $ver, true );
+			
 	}
 }
 

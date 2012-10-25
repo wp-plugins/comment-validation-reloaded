@@ -20,7 +20,7 @@ function comment_validation_reloaded_settings_args() {
 	$settings_arr = array(
 		/* Activate */
 		'activate'	=> false,
-		'version'	=> '1.7',
+		'version'	=> '1.10.0',
 		'author'	=> true,
 		'internal'	=> true,
 		'language'	=> '',
