@@ -44,6 +44,12 @@ Just delete the plugin.
 
 == Changelog ==
 
+= Version 0.4.3.1 (12/3/12)
+
+* Dashboard update.
+* Feed update.
+* Latest validate script.
+
 = Version 0.4.3 (10/25/12)
 
 * Update validate script to latest version.

@@ -198,7 +198,7 @@
         
 		<li><?php _e( 'Need a WP expert?', 'cvr' ); ?> <a href="http://frostywebdesigns.com/" title="Frosty Web Designs" class="external"><?php _e( 'Hire me', 'cvr' ); ?></a>.</li>
         
-		<li><?php _e( 'Looking for a WordPress plugin?', 'cvr' ); ?> <a href="http://thefrosty.com/" title="TheFrosty" class="external">Frosty plugins</a>.</li>
+		<li><?php _e( 'Looking for a WordPress plugin?', 'cvr' ); ?> <a href="http://extendd.com/" title="Extendd" class="external">Extendd.com</a>.</li>
         
 	</ul>
     
@@ -215,11 +215,11 @@
     
     	<li class="t1 t"><a><?php _e( 'Austin Passy', 'cvr' ); ?></a></li>
     	<li class="t2 t"><a><?php _e( 'WordCamp LA', 'cvr' ); ?></a></li>
-    	<li class="t3 t"><a><?php _e( 'Infield Box', 'cvr' ); ?></a></li>
+    	<li class="t3 t"><a><?php _e( 'Extendd', 'cvr' ); ?></a></li>
         
 	</ul>
     
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://infieldbox.com/feed', '3' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://extendd.com/feed', '3' ); ?>
 
 		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/WordCampLA', '2' );	?>
 

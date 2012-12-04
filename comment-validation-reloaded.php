@@ -3,7 +3,7 @@
  * Plugin Name: Comment Validation Reloaded
  * Plugin URI: http://austinpassy.com/wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.4.3
+ * Version: 0.4.3.1
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
@@ -98,15 +98,25 @@ function cvr_admin_init() {
 function cvr_localize() {
 	load_plugin_textdomain( 'cvr', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
+
 /**
  * Function to add the settings page
  * @since 0.1
  */
 function cvr_add_pages() {
-	if ( function_exists( 'add_options_page' ) ) 
-		$page = add_options_page( 'Comment Validation Reloaded Settings', 'Validation Reloaded', 'moderate_comments', 'comment-validation-reloaded.php', 'comment_validation_reloaded_page' );
-			add_action( 'admin_print_styles-' . $page, 'cvr_admin_style' );
-			add_action( 'admin_print_scripts-' . $page, 'cvr_admin_script' );
+	$css  = 'background: -moz-linear-gradient(left, rgba(255,255,255,0) 1%, rgba(255,255,255,0) 60%, rgba(255,255,255,1) 95%, rgba(247,247,247,1) 100%);
+background: -webkit-gradient(linear, left top, right top, color-stop(1%,rgba(255,255,255,0)), color-stop(60%,rgba(255,255,255,0)), color-stop(95%,rgba(255,255,255,1)), color-stop(100%,rgba(247,247,247,1)));
+background: -webkit-linear-gradient(left, rgba(255,255,255,0) 1%,rgba(255,255,255,0) 60%,rgba(255,255,255,1) 95%,rgba(247,247,247,1) 100%);
+background: -o-linear-gradient(left, rgba(255,255,255,0) 1%,rgba(255,255,255,0) 60%,rgba(255,255,255,1) 95%,rgba(247,247,247,1) 100%);
+background: -ms-linear-gradient(left, rgba(255,255,255,0) 1%,rgba(255,255,255,0) 60%,rgba(255,255,255,1) 95%,rgba(247,247,247,1) 100%);
+background: linear-gradient(to right, rgba(255,255,255,0) 1%,rgba(255,255,255,0) 60%,rgba(255,255,255,1) 95%,rgba(247,247,247,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00ffffff\', endColorstr=\'#f7f7f7\',GradientType=1 );';
+
+	$span = '<span style="overflow: hidden; position: absolute; width: 133px; ' . $css . ' z-index: 2;">&nbsp;</span>';
+	
+	$page = add_options_page( 'Comment Validation Reloaded Settings', $span . '<span style="display: block; width: 200%;">Comment Validation Reloaded</span>', 'moderate_comments', 'comment-validation-reloaded.php', 'comment_validation_reloaded_page' );
+		add_action( 'admin_print_styles-' . $page, 'cvr_admin_style' );
+		add_action( 'admin_print_scripts-' . $page, 'cvr_admin_script' );
 }
 
 /**
