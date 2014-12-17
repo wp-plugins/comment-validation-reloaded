@@ -58,4 +58,3 @@ if ( $min != "" )
 
 header("Content-type: application/javascript");
 echo external_options();
-?>

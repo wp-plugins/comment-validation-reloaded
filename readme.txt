@@ -2,8 +2,8 @@
 Contributors: austyfrosty
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CN9BU5LAYCXV8
 Tags: comment, validation, comment validation, jquery validation, reloaded
-Requires at least: 2.7
-Tested up to: 3.5
+Requires at least: 3.1
+Tested up to: 4.2
 Stable tag: trunk
 
 Avoid those pesky blank page with an error message like "please fill out required fields" then loosing your/users comment info.
@@ -14,7 +14,7 @@ Avoid those pesky blank page with an error message like &ldquo;please fill out r
 
 **Why should you install it?** Because you care for comments and want to help users reduce mistakes that hold them off from commenting at all.
 
-**Whats the technology used?** [jQuery](http://jquery.com) and the [jQuery Validation plugin](http://bassistance.de/jquery-plugins/jquery-plugin-validation/) with a few customizations to make it fit into any WordPress theme.
+**Whats the technology used?** [jQuery](http://jquery.com) and the [jQuery Validation plugin](http://jqueryvalidation.org/) with a few customizations to make it fit into any WordPress theme.
 
 == Installation ==
 
@@ -43,6 +43,13 @@ Just delete the plugin.
 
 
 == Changelog ==
+
+= Version 0.5 (12/17/14)
+
+* Ready for WordPress 4.1
+* Updated validate script to 1.13.1
+* Updated CDN URL.
+* Cleaned up code.
 
 = Version 0.4.3.1 (12/3/12)
 

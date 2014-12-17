@@ -1,13 +1,13 @@
 <?php
 /*
  * Plugin Name: Comment Validation Reloaded
- * Plugin URI: http://austinpassy.com/wordpress-plugins/comment-validation-reloaded
+ * Plugin URI: http://austin.passy.co/wordpress-plugins/comment-validation-reloaded
  * Description: Comment Validation Reloaded uses the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery form validation</a> and a custom WordPress script built by <a href="http://twitter.com/thefrosty">@TheFrosty</a>.
- * Version: 0.4.3.1
+ * Version: 0.5
  * Author: Austin Passy
  * Author URI: http://frostywebdesigns.com
  *
- * @copyright 2010
+ * @copyright 2010 - 2015
  * @author Austin Passy
  * @link http://frostywebdesigns.com/
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -103,18 +103,8 @@ function cvr_localize() {
  * Function to add the settings page
  * @since 0.1
  */
-function cvr_add_pages() {
-	$css  = 'background: -moz-linear-gradient(left, rgba(255,255,255,0) 1%, rgba(255,255,255,0) 60%, rgba(255,255,255,1) 95%, rgba(247,247,247,1) 100%);
-background: -webkit-gradient(linear, left top, right top, color-stop(1%,rgba(255,255,255,0)), color-stop(60%,rgba(255,255,255,0)), color-stop(95%,rgba(255,255,255,1)), color-stop(100%,rgba(247,247,247,1)));
-background: -webkit-linear-gradient(left, rgba(255,255,255,0) 1%,rgba(255,255,255,0) 60%,rgba(255,255,255,1) 95%,rgba(247,247,247,1) 100%);
-background: -o-linear-gradient(left, rgba(255,255,255,0) 1%,rgba(255,255,255,0) 60%,rgba(255,255,255,1) 95%,rgba(247,247,247,1) 100%);
-background: -ms-linear-gradient(left, rgba(255,255,255,0) 1%,rgba(255,255,255,0) 60%,rgba(255,255,255,1) 95%,rgba(247,247,247,1) 100%);
-background: linear-gradient(to right, rgba(255,255,255,0) 1%,rgba(255,255,255,0) 60%,rgba(255,255,255,1) 95%,rgba(247,247,247,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00ffffff\', endColorstr=\'#f7f7f7\',GradientType=1 );';
-
-	$span = '<span style="overflow: hidden; position: absolute; width: 133px; ' . $css . ' z-index: 2;">&nbsp;</span>';
-	
-	$page = add_options_page( 'Comment Validation Reloaded Settings', $span . '<span style="display: block; width: 200%;">Comment Validation Reloaded</span>', 'moderate_comments', 'comment-validation-reloaded.php', 'comment_validation_reloaded_page' );
+function cvr_add_pages() {	
+	$page = add_options_page( 'Comment Validation Reloaded Settings', 'Comment Validation', 'moderate_comments', 'comment-validation-reloaded.php', 'comment_validation_reloaded_page' );
 		add_action( 'admin_print_styles-' . $page, 'cvr_admin_style' );
 		add_action( 'admin_print_scripts-' . $page, 'cvr_admin_script' );
 }
@@ -167,10 +157,10 @@ function cvr_script() {
 	if ( $active != false && ( is_singular() && comments_open() ) ) {
 		
 		if ( $internal != false ) {
-			wp_register_script( 'comment-validation', 'http://ajax.microsoft.com/ajax/jquery.validate/' . $ver . '/jquery.validate.min.js', array( 'jquery' ), $ver, true );
+			wp_register_script( 'comment-validation', 'http://ajax.aspnetcdn.com/ajax/jquery.validate/' . $ver . '/jquery.validate.min.js', array( 'jquery' ), $ver, true );
 			wp_enqueue_script( 'comment-validation' );
 		} else {
-			wp_register_script( 'comment-validation', CVR_JS . '/validate.min.js', array( 'jquery' ), '1.11', true );
+			wp_register_script( 'comment-validation', CVR_JS . '/validate.min.js', array( 'jquery' ), '1.13.1', true );
 			wp_enqueue_script( 'comment-validation' );
 		}
 		
@@ -272,28 +262,37 @@ function cvr_author() {
  * @package Admin
  */
 if ( !function_exists( 'thefrosty_network_feed' ) ) {
-	function thefrosty_network_feed( $attr, $count ) {		
-		global $wpdb;
+	function thefrosty_network_feed( $feed, $count ) {
+		///////		
+		if ( !function_exists( 'fetch_feed' ) )
+			include_once( ABSPATH . WPINC . '/feed.php' );
 		
-		include_once( ABSPATH . WPINC . '/class-simplepie.php' );
-		$feed = new SimplePie();
-		$feed->set_feed_url( $attr );
+		add_filter( 'wp_feed_cache_transient_lifetime', create_function( '', 'return WEEK_IN_SECONDS;' ) );
 		
-		$feed->enable_cache( true );
-		$cache_folder = plugin_dir_path( __FILE__ ) . 'admin/cache';
-		if ( !is_writable( $cache_folder ) ) chmod( $cache_folder, 0666 );
-		$feed->set_cache_location( $cache_folder );
-		
-		$feed->init();
-		$feed->handle_content_type();
+		$rss = fetch_feed( $feed );
+		remove_all_filters( 'wp_feed_cache_transient_lifetime' );
 
-		$items = $feed->get_item();
+		// Bail if feed doesn't work
+		if ( !$rss || is_wp_error( $rss ) )
+			return false;
+
+		$rss_items = $rss->get_items( 0, $rss->get_item_quantity( 4 ) );
+
+		// If the feed was erroneous 
+		if ( !$rss_items ) {
+			$md5 = md5( $feed );
+			delete_transient( 'feed_' . $md5 );
+			delete_transient( 'feed_mod_' . $md5 );
+			$rss       = fetch_feed( $feed );
+			$rss_items = $rss->get_items( 0, $rss->get_item_quantity( 4 ) );
+		}
+
 		echo '<div class="t' . $count . ' tab-content postbox open feed">';		
 		echo '<ul>';		
-		if ( empty( $items ) ) { 
+		if ( empty( $rss_items ) ) { 
 			echo '<li>No items</li>';		
 		} else {
-			foreach( $feed->get_items( 0, 3 ) as $item ) : ?>		
+			foreach( $rss_items as $item ) : ?>		
 				<li>		
 					<a href='<?php echo $item->get_permalink(); ?>' title='<?php echo $item->get_description(); ?>'><?php echo $item->get_title(); ?></a><br /> 		
 					<span style="font-size:10px; color:#aaa;"><?php echo $item->get_date('F, jS Y | g:i a'); ?></span>		
@@ -345,5 +344,3 @@ function cvr_admin_warnings() {
 
 	return;
 }
-
-?>

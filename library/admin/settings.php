@@ -34,12 +34,13 @@
             	<label for="<?php echo $data['version']; ?>"><?php _e( 'Version:', 'cvr' ); ?></label> 
             </th>
             <td>
-            	<select id="<?php echo $data['version']; ?>" name="<?php echo $data['version']; ?>" style="width:60px;">
+            	<select id="<?php echo $data['version']; ?>" name="<?php echo $data['version']; ?>" style="width:90px;">
                     <option value="1.6" <?php if ( $val['version'] == '1.7' ) echo ' selected="selected"'; ?>>1.7</option>
                     <option value="1.8" <?php if ( $val['version'] == '1.8' ) echo ' selected="selected"'; ?>>1.8</option>
                     <option value="1.8.1" <?php if ( $val['version'] == '1.8.1' ) echo ' selected="selected"'; ?>>1.8.1</option>
                     <option value="1.9" <?php if ( $val['version'] == '1.9' ) echo ' selected="selected"'; ?>>1.9</option>
                     <option value="1.10.0" <?php if ( $val['version'] == '1.10.0' ) echo ' selected="selected"'; ?>>1.10.0</option>
+                    <option value="1.13.1" <?php if ( $val['version'] == '1.13.1' ) echo ' selected="selected"'; ?>>1.13.1</option>
                 </select>
             </td>
         </tr>
@@ -214,16 +215,16 @@
 	<ul class="tabs">
     
     	<li class="t1 t"><a><?php _e( 'Austin Passy', 'cvr' ); ?></a></li>
-    	<li class="t2 t"><a><?php _e( 'WordCamp LA', 'cvr' ); ?></a></li>
-    	<li class="t3 t"><a><?php _e( 'Extendd', 'cvr' ); ?></a></li>
+    	<li class="t2 t"><a><?php _e( 'Extendd', 'cvr' ); ?></a></li>
+    	<li class="t3 t"><a><?php _e( 'Extendd Plugins', 'cvr' ); ?></a></li>
+    	<li class="t4 t"><a><?php _e( 'Frosty Media', 'cvr' ); ?></a></li>
         
 	</ul>
     
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://extendd.com/feed', '3' ); ?>
-
-		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/WordCampLA', '2' );	?>
-
 		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://feeds.feedburner.com/AustinPassy', '1' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://extendd.com/feed', '2' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://extendd.com/feed/?post_type=plugin', '3' ); ?>
+		<?php if ( function_exists( 'thefrosty_network_feed' ) ) thefrosty_network_feed( 'http://frosty.media/feed', '4' ); ?>
     
 </div>
 </div>

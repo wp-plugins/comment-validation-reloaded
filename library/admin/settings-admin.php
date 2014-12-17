@@ -19,8 +19,8 @@
 function comment_validation_reloaded_settings_args() {
 	$settings_arr = array(
 		/* Activate */
-		'activate'	=> false,
-		'version'	=> '1.10.0',
+		'activate'	=> true,
+		'version'	=> '1.13.1',
 		'author'	=> true,
 		'internal'	=> true,
 		'language'	=> '',
@@ -56,7 +56,8 @@ function comment_validation_reloaded_page() {
 	/*
 	* Add a new option to the database
 	*/
-	add_option( 'comment_validation_reloaded_settings', $settings_arr );
+	if ( !get_option( 'comment_validation_reloaded_settings' ) )
+		add_option( 'comment_validation_reloaded_settings', $settings_arr );
 
 	/*
 	* Set form data IDs the same as settings keys
@@ -86,7 +87,7 @@ function comment_validation_reloaded_page() {
 		* Loops through each option and sets it if needed
 		*/
 		foreach ( $settings_arr as $key => $value ) :
-			$settings[$key] = $val[$key] = $_POST[$data[$key]];
+			$settings[$key] = $val[$key] = isset( $_POST[$data[$key]] ) ? $_POST[$data[$key]] : '';
 		endforeach;
 
 		/*
@@ -97,8 +98,7 @@ function comment_validation_reloaded_page() {
 		/*
 		* Output the settings page
 		*/
-        echo '<div class="wrap">';
-		if ( function_exists('screen_icon') ) screen_icon();
+		echo '<div class="wrap">';
 		echo '<h2>' . $settings_page_title . '</h2>';
 		echo '<div class="updated" style="margin:15px 0;">';
 		_e( '<p><strong>Don&prime;t you feel good. You just saved me!</strong></p>', 'cvr' );
@@ -116,8 +116,7 @@ function comment_validation_reloaded_page() {
 		/*
 		* Output the settings page
 		*/
-        echo '<div class="wrap">';
-		if ( function_exists('screen_icon') ) screen_icon();
+		echo '<div class="wrap">';
 		echo '<h2>' . $settings_page_title . '</h2>';
 		echo '<div class="updated" style="margin:15px 0;">';
 		_e( '<p><strong>Oh no! I&prime;ve been reset.</strong></p>', 'cvr' );
@@ -126,7 +125,6 @@ function comment_validation_reloaded_page() {
 	else :
 
 		echo '<div class="wrap">';
-		if ( function_exists('screen_icon') ) screen_icon();
 		echo '<h2>' . $settings_page_title . '</h2>';
 		
 	endif;
@@ -168,7 +166,4 @@ function comment_validation_reloaded_page() {
 			<br style="clear:both;" />
 
 		</div>
-<?php
-}
-
-?>
+<?php }
